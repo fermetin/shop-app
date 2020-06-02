@@ -1,30 +1,30 @@
 import React from 'react'
-import { Text} from 'react-native'
+import { Text } from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons'
-import colors  from '../../constants/colors';
+import colors from '../../constants/colors';
 
 
-const ShopBtn = ({route,style, navigation,iconStyle,to,}) =>{
-    
-    const pressHandler = ()=>{
-        if(typeof to === 'string'){
+const ShopBtn = ({ route, style, navigation, iconStyle, to, name, size }) => {
+
+    const pressHandler = () => {
+        if (typeof to === 'string') {
             navigation.navigate(to);
-        }else{
+        } else {
             to()
-        }   
+        }
     }
 
-    return(
-        <FontAwesome5.Button 
+    return (
+        <FontAwesome5.Button
             backgroundColor="transparent"
-            size={40}
+            size={size ? size : 40}
             iconStyle={{
-                color:colors.accent,
+                color: colors.accent,
                 ...iconStyle,
-            }} 
-            name="shopping-cart" 
+            }}
+            name={name}
             onPress={pressHandler} />
-        )
+    )
 }
 
 

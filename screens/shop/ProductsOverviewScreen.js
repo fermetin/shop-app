@@ -7,6 +7,7 @@ import * as cartActions from '../../store/actions/cart'
 import * as productActions from '../../store/actions/products'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ShopBtn from '../../components/UI/ShopBtn'
+import { TouchableHighlight, TouchableNativeFeedback } from 'react-native-gesture-handler'
 
 const ProductsOverviewScreen = props => {
     const [isloading, setisloading] = useState(true)
@@ -69,7 +70,7 @@ const ProductsOverviewScreen = props => {
             productId
         })
     }
-    const openOtherButtons=()=>{
+    const openOtherButtons = () => {
         setbtmdrawerBtn(!btmdrawerBtn)
     }
     return (
@@ -93,11 +94,11 @@ const ProductsOverviewScreen = props => {
             <View style={styles.btnConatinerStyle}>
                 {btmdrawerBtn ?
                     <View>
-                        <ShopBtn to ='CartScreen' route={props.route} navigation={props.navigation} />
-                        <ShopBtn to ='Orders' route={props.route} navigation={props.navigation} />
+                        <ShopBtn name="history" to='CartScreen' route={props.route} navigation={props.navigation} />
+                        <ShopBtn name="shopping-cart" to='Orders' route={props.route} navigation={props.navigation} />
                     </View>
                     : null}
-                <ShopBtn  route={props.route} navigation={props.navigation} to={openOtherButtons} />
+                <ShopBtn name={btmdrawerBtn ? 'times-circle':'plus-circle'} size={btmdrawerBtn ? 65:40}  route={props.route} navigation={props.navigation} to={openOtherButtons} />
             </View>
         </SafeAreaView>
     )
