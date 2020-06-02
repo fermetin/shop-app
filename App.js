@@ -8,7 +8,6 @@ import createSentryMiddleware from "redux-sentry-middleware";
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider, useSelector } from 'react-redux'
 import ReduxThunk from 'redux-thunk'
-import * as Sentry from 'sentry-expo';
 import productsReducer from './store/reducers/products'
 import cartReducer from './store/reducers/cart'
 import ordersReducer from './store/reducers/orders'
@@ -17,11 +16,6 @@ import { Provider as PaperProvider } from 'react-native-paper'
 import AppNavigator from './navigation/AppNavigator'
 
 
-Sentry.init({
-  dsn: 'https://48138b65bb2943c6a7c99e65dc8e5061@o401155.ingest.sentry.io/5260430',
-  enableInExpoDevelopment: true,
-  debug: true,
-});
 
 const rootReducer = combineReducers({
   products: productsReducer,
@@ -31,11 +25,8 @@ const rootReducer = combineReducers({
 })
 const store = createStore(rootReducer,
   composeWithDevTools(
-    applyMiddleware(ReduxThunk,
-      createSentryMiddleware(Sentry, {
-        // Optionally pass some options here.
-      })),
-  ))
+    applyMiddleware(ReduxThunk,)),
+  )
 
 export default function App() {
 

@@ -6,10 +6,12 @@ import Product from '../../components/shop/Products'
 import * as cartActions from '../../store/actions/cart'
 import * as productActions from '../../store/actions/products'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import ShopBtn from '../../components/UI/ShopBtn'
 
 const ProductsOverviewScreen = props => {
     const [isloading, setisloading] = useState(true)
     const [refreshing, setrefreshing] = useState(false)
+    const [btmdrawerBtn, setbtmdrawerBtn] = useState(false)
     const [err, seterr] = useState()
     const products = useSelector(state => state.products.availableProducts)
     const dispatch = useDispatch()
@@ -32,7 +34,7 @@ const ProductsOverviewScreen = props => {
 
     useEffect(() => {
         setisloading(true)
-        loadingProducts().then(()=>{
+        loadingProducts().then(() => {
             setisloading(false)
         })
 
@@ -67,28 +69,48 @@ const ProductsOverviewScreen = props => {
             productId
         })
     }
-
+    const openOtherButtons=()=>{
+        setbtmdrawerBtn(!btmdrawerBtn)
+    }
     return (
-        <FlatList
-            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadingProducts} />}
-            data={products}
-            renderItem={(itemData) =>
-                <Product
-                    user={false}
-                    item={itemData.item}
-                    clickDetails={() => detailScreen(itemData.item.title, itemData.item.id)}
-                >
-                    <View style={styles.btns}>
-                        <Button title="Details" onPress={() => detailScreen(itemData.item.title, itemData.item.id)} />
-                        <Button title="to Cart" onPress={() => dispatch(cartActions.addToCart(itemData.item))} />
+        <SafeAreaView style={{ flex: 1 }}>
+            <FlatList
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadingProducts} />}
+                data={products}
+                renderItem={(itemData) =>
+                    <Product
+                        user={false}
+                        item={itemData.item}
+                        clickDetails={() => detailScreen(itemData.item.title, itemData.item.id)}
+                    >
+                        <View style={styles.btns}>
+                            <Button title="Details" onPress={() => detailScreen(itemData.item.title, itemData.item.id)} />
+                            <Button title="to Cart" onPress={() => dispatch(cartActions.addToCart(itemData.item))} />
+                        </View>
+                    </Product>}
+
+            />
+            <View style={styles.btnConatinerStyle}>
+                {btmdrawerBtn ?
+                    <View>
+                        <ShopBtn to ='CartScreen' route={props.route} navigation={props.navigation} />
+                        <ShopBtn to ='Orders' route={props.route} navigation={props.navigation} />
                     </View>
-                </Product>}
-        />
+                    : null}
+                <ShopBtn  route={props.route} navigation={props.navigation} to={openOtherButtons} />
+            </View>
+        </SafeAreaView>
     )
 
 }
 const styles = StyleSheet.create({
-    cont: {
+    btnConatinerStyle: {
+        alignSelf: 'flex-end',
+        position: 'absolute',
+        bottom: 25,
+        right: 25
+    }
+    , cont: {
         elevation: 5,
         borderRadius: 10,
         margin: 20,

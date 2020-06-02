@@ -37,7 +37,6 @@
     "redux": "^4.0.5",
     "redux-sentry-middleware": "^0.1.8",
     "redux-thunk": "^2.3.0",
-    "sentry-expo": "^2.0.4",
     "validate.js": "^0.13.1",
     "watchman": "^1.0.0"
   },

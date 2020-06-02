@@ -24,7 +24,7 @@ const ShopNavigator = () => {
                 component={ProductsOverviewScreen}
                 options={({ route, navigation }) => ({
                     title: "All Products",
-                    headerRight:()=><ShopBtn route={route} navigation={navigation} />,
+                    //headerRight:()=><ShopBtn route={route} navigation={navigation} />,
                     headerLeft:()=><DrawerBtn iconStyle={{marginLeft:10}} color={colors.primary} route={route} navigation={navigation} />
                 })
                 }

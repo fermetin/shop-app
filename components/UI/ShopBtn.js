@@ -4,17 +4,26 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import colors  from '../../constants/colors';
 
 
-const ShopBtn = ({route, navigation,iconStyle}) =>{
+const ShopBtn = ({route,style, navigation,iconStyle,to,}) =>{
+    
+    const pressHandler = ()=>{
+        if(typeof to === 'string'){
+            navigation.navigate(to);
+        }else{
+            to()
+        }   
+    }
+
     return(
         <FontAwesome5.Button 
-            backgroundColor={colors.primary}
-            size={35}
+            backgroundColor="transparent"
+            size={40}
             iconStyle={{
                 color:colors.accent,
-                ...iconStyle
+                ...iconStyle,
             }} 
             name="shopping-cart" 
-            onPress={()=>navigation.navigate('CartScreen')} />
+            onPress={pressHandler} />
         )
 }
 
