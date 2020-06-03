@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text } from 'react-native'
-import { FontAwesome5 } from '@expo/vector-icons'
+import { FontAwesome5, Ionicons } from '@expo/vector-icons'
 import colors from '../../constants/colors';
 
 
@@ -15,9 +15,9 @@ const ShopBtn = ({ route, style, navigation, iconStyle, to, name, size }) => {
     }
 
     return (
-        <FontAwesome5.Button
+        <Ionicons
             backgroundColor="transparent"
-            size={size ? size : 40}
+            size={size && size || 45}
             iconStyle={{
                 color: colors.accent,
                 ...iconStyle,

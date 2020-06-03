@@ -94,11 +94,11 @@ const ProductsOverviewScreen = props => {
             <View style={styles.btnConatinerStyle}>
                 {btmdrawerBtn ?
                     <View>
-                        <ShopBtn name="history" to='CartScreen' route={props.route} navigation={props.navigation} />
-                        <ShopBtn name="shopping-cart" to='Orders' route={props.route} navigation={props.navigation} />
+                        <ShopBtn name="ios-card" to='CartScreen' route={props.route} navigation={props.navigation} />
+                        <ShopBtn name="ios-cash" to='Orders' route={props.route} navigation={props.navigation} />
                     </View>
                     : null}
-                <ShopBtn name={btmdrawerBtn ? 'times-circle':'plus-circle'} size={btmdrawerBtn ? 65:40}  route={props.route} navigation={props.navigation} to={openOtherButtons} />
+                <ShopBtn name={btmdrawerBtn ? 'md-close':'md-eye'} size={btmdrawerBtn ? 80:70}  route={props.route} navigation={props.navigation} to={openOtherButtons} />
             </View>
         </SafeAreaView>
     )
