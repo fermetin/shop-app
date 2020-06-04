@@ -11,8 +11,6 @@ const UserPrdouctScreen = ({ props, navigation }) => {
     const [error, seterror] = useState()
     const userItems = useSelector(state => state.products.userProducts)
     const dispatch = useDispatch()
-    console.log(userItems)
-    console.log(useSelector(state => state.products.availableProducts))
 
     useEffect(() => {
         if (error) {

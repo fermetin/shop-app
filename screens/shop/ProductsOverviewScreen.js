@@ -86,8 +86,8 @@ const ProductsOverviewScreen = props => {
                         clickDetails={() => detailScreen(itemData.item.title, itemData.item.id)}
                     >
                         <View style={styles.btns}>
-                            <Button title="Details" onPress={() => detailScreen(itemData.item.title, itemData.item.id)} />
-                            <Button title="to Cart" onPress={() => dispatch(cartActions.addToCart(itemData.item))} />
+                            <Button title="Details" color={colors.accent} onPress={() => detailScreen(itemData.item.title, itemData.item.id)} />
+                            <Button title="to Cart" color={colors.accent} onPress={() => dispatch(cartActions.addToCart(itemData.item))} />
                         </View>
                     </Product>}
 
