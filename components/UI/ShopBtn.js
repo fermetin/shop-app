@@ -1,10 +1,10 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { FontAwesome5, Ionicons } from '@expo/vector-icons'
 import colors from '../../constants/colors';
 
 
-const ShopBtn = ({ route, style, navigation, iconStyle, to, name, size }) => {
+const ShopBtn = ({ route, style, navigation, iconStyle, to, name, size,customColor }) => {
 
     const pressHandler = () => {
         if (typeof to === 'string') {
@@ -15,15 +15,18 @@ const ShopBtn = ({ route, style, navigation, iconStyle, to, name, size }) => {
     }
 
     return (
-        <Ionicons
-            backgroundColor="transparent"
-            size={size && size || 45}
-            iconStyle={{
-                color: colors.accent,
-                ...iconStyle,
-            }}
-            name={name}
-            onPress={pressHandler} />
+        <TouchableOpacity>
+            <Ionicons
+                backgroundColor="transparent"
+                color={customColor}
+                size={size && size || 45}
+                iconStyle={{
+                    color: colors.accent,
+                    ...iconStyle,
+                }}
+                name={name}
+                onPress={pressHandler} />
+        </TouchableOpacity>
     )
 }
 

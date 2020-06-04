@@ -8,6 +8,7 @@ import * as productActions from '../../store/actions/products'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ShopBtn from '../../components/UI/ShopBtn'
 import { TouchableHighlight, TouchableNativeFeedback } from 'react-native-gesture-handler'
+import colors from '../../constants/colors'
 
 const ProductsOverviewScreen = props => {
     const [isloading, setisloading] = useState(true)
@@ -94,11 +95,11 @@ const ProductsOverviewScreen = props => {
             <View style={styles.btnConatinerStyle}>
                 {btmdrawerBtn ?
                     <View>
-                        <ShopBtn name="ios-card" to='CartScreen' route={props.route} navigation={props.navigation} />
-                        <ShopBtn name="ios-cash" to='Orders' route={props.route} navigation={props.navigation} />
+                        <ShopBtn name="ios-cart" to='CartScreen' customColor={colors.primary} route={props.route} navigation={props.navigation} />
+                        <ShopBtn name="ios-archive" to='Orders' customColor={colors.primary} route={props.route} navigation={props.navigation} />
                     </View>
                     : null}
-                <ShopBtn name={btmdrawerBtn ? 'md-close':'md-eye'} size={btmdrawerBtn ? 80:70}  route={props.route} navigation={props.navigation} to={openOtherButtons} />
+                <ShopBtn name={btmdrawerBtn ? 'ios-close':'md-reorder'} customColor={colors.primary} size={btmdrawerBtn ? 90:70}  route={props.route} navigation={props.navigation} to={openOtherButtons} />
             </View>
         </SafeAreaView>
     )
