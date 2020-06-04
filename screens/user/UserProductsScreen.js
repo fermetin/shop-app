@@ -5,6 +5,8 @@ import Products from '../../components/shop/Products'
 import { useSelector, useDispatch } from 'react-redux'
 import * as productActions from '../../store/actions/products'
 import { ScrollView } from 'react-native-gesture-handler'
+import CustomProductButton from '../../components/UI/CustomProductButton'
+import colors from '../../constants/colors'
 
 const UserPrdouctScreen = ({ props, navigation }) => {
     const [isLoading, setisLoading] = useState(false)
@@ -42,25 +44,31 @@ const UserPrdouctScreen = ({ props, navigation }) => {
                 <Text>You Dont Have Any Product Now.Let's Some Add</Text>
             </View>)
     }
+
+    const deleteButtonHandler = () => {
+        Alert.alert(
+            'Hey',
+            'Are you sure !!! You gonna delete this product',
+            [
+                { text: 'I\'am sure', onPress: () => deleteProduct(itemData.item.id) },
+                { text: 'Cancel', style: 'cancel' }
+            ])
+    }
+    const editButtonHanlder = ()=>{
+        navigation.navigate('AddProductScreen', {
+            productid: itemData.item.id,
+            user: true
+        })
+    }
+
     return (
         <FlatList
 
             data={userItems} renderItem={(itemData) =>
                 <Products user={true} item={itemData.item} >
                     <View style={styles.btns}>
-                        <Button title="EDIT." onPress={() => navigation.navigate('AddProductScreen', {
-                            productid: itemData.item.id,
-                            user: true
-                        })} />
-                        <Button title="Delete" onPress={() =>
-                            Alert.alert(
-                                'Hey',
-                                'Are you sure !!! You gonna delete this product',
-                                [
-                                    { text: 'I\'am sure', onPress: () => deleteProduct(itemData.item.id) },
-                                    { text: 'Cancel', style: 'cancel' }
-                                ])
-                        } />
+                        <CustomProductButton btnName=" EDIT  " btnColor={colors.primary} onPress={() =>editButtonHanlder() } />
+                        <CustomProductButton btnName="DELETE" btnColor={colors.primary} onClickHandler={() => deleteButtonHandler()} />
                     </View>
                 </Products>} />
 

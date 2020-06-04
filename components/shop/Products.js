@@ -20,8 +20,8 @@ const Products = props => {
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.price}>{item.price} $ </Text>
                 </View>
-                {props.children}
             </Touch>
+                {props.children}
         </View>
     );
 };

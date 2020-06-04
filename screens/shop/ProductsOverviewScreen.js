@@ -6,14 +6,13 @@ import Product from '../../components/shop/Products'
 import * as cartActions from '../../store/actions/cart'
 import * as productActions from '../../store/actions/products'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import ShopBtn from '../../components/UI/ShopBtn'
-import { TouchableHighlight, TouchableNativeFeedback } from 'react-native-gesture-handler'
+import NestedButtons from '../../components/UI/NestedButtons'
 import colors from '../../constants/colors'
+import CustomProductButton from '../../components/UI/CustomProductButton'
 
 const ProductsOverviewScreen = props => {
     const [isloading, setisloading] = useState(true)
     const [refreshing, setrefreshing] = useState(false)
-    const [btmdrawerBtn, setbtmdrawerBtn] = useState(false)
     const [err, seterr] = useState()
     const products = useSelector(state => state.products.availableProducts)
     const dispatch = useDispatch()
@@ -71,8 +70,11 @@ const ProductsOverviewScreen = props => {
             productId
         })
     }
-    const openOtherButtons = () => {
-        setbtmdrawerBtn(!btmdrawerBtn)
+    const detailsButtonHandler = (itemData) => {
+        detailScreen(itemData.item.title, itemData.item.id)
+    }
+    const toCartButtonHandler = (itemData) => {
+        dispatch(cartActions.addToCart(itemData.item))
     }
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -86,33 +88,20 @@ const ProductsOverviewScreen = props => {
                         clickDetails={() => detailScreen(itemData.item.title, itemData.item.id)}
                     >
                         <View style={styles.btns}>
-                            <Button title="Details" color={colors.accent} onPress={() => detailScreen(itemData.item.title, itemData.item.id)} />
-                            <Button title="to Cart" color={colors.accent} onPress={() => dispatch(cartActions.addToCart(itemData.item))} />
+                            <CustomProductButton btnName="Details" btnColor={colors.primary} onClickHandler={()=>detailsButtonHandler(itemData)} />
+                           <CustomProductButton  btnName="to Cart" btnColor={colors.primary} onClickHandler={()=>toCartButtonHandler(itemData)} />
                         </View>
                     </Product>}
 
             />
-            <View style={styles.btnConatinerStyle}>
-                {btmdrawerBtn ?
-                    <View>
-                        <ShopBtn name="ios-cart" to='CartScreen' customColor={colors.primary} route={props.route} navigation={props.navigation} />
-                        <ShopBtn name="ios-archive" to='Orders' customColor={colors.primary} route={props.route} navigation={props.navigation} />
-                    </View>
-                    : null}
-                <ShopBtn name={btmdrawerBtn ? 'ios-close':'md-reorder'} customColor={colors.primary} size={btmdrawerBtn ? 90:70}  route={props.route} navigation={props.navigation} to={openOtherButtons} />
-            </View>
+            <NestedButtons route={props.route} navigation={props.navigation} />
         </SafeAreaView>
     )
 
 }
 const styles = StyleSheet.create({
-    btnConatinerStyle: {
-        alignSelf: 'flex-end',
-        position: 'absolute',
-        bottom: 25,
-        right: 25
-    }
-    , cont: {
+
+    cont: {
         elevation: 5,
         borderRadius: 10,
         margin: 20,

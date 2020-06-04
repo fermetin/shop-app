@@ -5,6 +5,9 @@ import { FlatList } from 'react-native-gesture-handler';
 import { Button, Icon } from 'react-native-elements';
 import * as cartActions from '../../store/actions/cart'
 import * as ordersActions from '../../store/actions/orders'
+import CustomProductButton from '../../components/UI/CustomProductButton';
+import NestedButtons from '../../components/UI/NestedButtons';
+import colors from '../../constants/colors';
 
 
 const CartScreen = props => {
@@ -55,15 +58,11 @@ const CartScreen = props => {
         <View style={styles.screen}>
             <View style={styles.amountcont} >
                 <Text style={styles.txt}>Total: ${total}</Text>
-                {isLoading ? <ActivityIndicator size='large' color='red' />:<Button
-                    icon={<Icon
-                        color='white'
-                        name="payment"
-                        size={20}
-                        title="Order Now"
-                        containerStyle={styles.btnicn} />}
+                {isLoading ? <ActivityIndicator size='large' color='red' />:<CustomProductButton
+                    btnName="Order"
+                    btnColor={colors.primary}
                     disabled={cartItems.length === 0}
-                    onPress={sendOrder}
+                    onClickHandler={sendOrder}
                 />}
                 
             </View>
@@ -71,13 +70,21 @@ const CartScreen = props => {
                 <Text style={styles.header}>Items</Text>
                 <FlatList data={cartItems} renderItem={RenderProducts} />
             </View>
+            <NestedButtons route={props.route} navigation={props.navigation} />
         </View>
     );
 };
-
+/**
+                    icon={<Icon
+                        color='white'
+                        name="payment"
+                        size={20}
+                        title="Order Now"
+                        containerStyle={styles.btnicn} />} */
 const styles = StyleSheet.create({
     screen: {
-        margin: 20
+        flex:1,
+        margin: 20,
     },
     amountcont: {
         flexDirection: 'row',
