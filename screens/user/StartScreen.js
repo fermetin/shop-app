@@ -10,6 +10,7 @@ const StartScreen = ({ navigation }) => {
     const dispatch = useDispatch()
     
     useEffect(() => {
+        //if user token expired or not
         const tryToLogin = async () => {
             const rawData = await AsyncStorage.getItem('userData')
             if (!rawData) {
@@ -19,17 +20,19 @@ const StartScreen = ({ navigation }) => {
             const userData = JSON.parse(rawData)
             const { token, userId, tokenExpiresIn } = userData
             const expiredDateMs = new Date(tokenExpiresIn)
+            //if token expired 
             if ( expiredDateMs <= new Date() || !token || !userId) {
                 navigation.replace('AuthScreen')
                 return
             }
+            //token is still valid so we can go through app 
             dispatch(authAction.authenticate(token, userId))
             navigation.replace("MainDrawerNavigator")
         }
         tryToLogin()
         return
     }, [dispatch])
-
+    //if its takes long time show spinner
     return (
         <View style={styles.container}>
             <ActivityIndicator size={50} color="gray" />
