@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { FlatList, View, Text, StyleSheet, Button, ActivityIndicator, RefreshControl, ScrollView } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import Product from '../../components/shop/Products'
+import Products from '../../components/shop/Products'
 import * as cartActions from '../../store/actions/cart'
 import * as productActions from '../../store/actions/products'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -86,7 +86,7 @@ const ProductsOverviewScreen = props => {
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadingProducts} />}
                 data={products}
                 renderItem={(itemData) =>
-                    <Product
+                    <Products
                         user={false}
                         item={itemData.item}
                         clickDetails={() => detailScreen(itemData.item.title, itemData.item.id)}
@@ -95,7 +95,7 @@ const ProductsOverviewScreen = props => {
                             <CustomProductButton btnName="Details" btnColor={colors.primary} onClickHandler={()=>detailsButtonHandler(itemData)} />
                            <CustomProductButton  btnName="to Cart" btnColor={colors.primary} onClickHandler={()=>toCartButtonHandler(itemData)} />
                         </View>
-                    </Product>}
+                    </Products>}
 
             />
             <NestedButtons route={props.route} navigation={props.navigation} />
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 20,
-        paddingBottom: 5
+        paddingBottom: 5,
     }, middlestaff: {
         flex: 1,
         justifyContent: 'center',

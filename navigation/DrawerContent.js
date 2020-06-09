@@ -19,7 +19,7 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import DrawerBtn from '../components/UI/DrawerBtn';
 
-export function DrawerContent(props) {
+export const  DrawerContent=(props)=>{
   const { navigation } = props
   return (
     <DrawerContentScrollView {...props}>

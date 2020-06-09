@@ -21,7 +21,9 @@ const Products = props => {
                     <Text style={styles.price}>{item.price} $ </Text>
                 </View>
             </Touch>
+            <View style={styles.childrenStyle}>
                 {props.children}
+            </View>
         </View>
     );
 };
@@ -32,28 +34,31 @@ const styles = StyleSheet.create({
         margin: 20,
         height: 300,
         backgroundColor: 'white',
-        overflow: 'hidden'
+        overflow: 'hidden',
     },
     image: {
         width: "100%",
         height: "60%",
     },
     title: {
-        fontSize: 24,
-        marginVertical: 4,
+        textAlign: 'center',
+        width: `100%`,
+        fontSize: 30,
         fontWeight: 'bold',
     },
     price: {
-        fontSize: 16,
-        color: '#888'
+        fontSize: 22,
+        color: '#888',
     },
     detailcont: {
+        marginTop: 20,
         alignItems: 'center',
-        marginVertical: 10,
-        height: "20%",
-        padding: 10
-    },
-    
+        height: "22%",    
+    }, 
+    childrenStyle: { 
+        flex: 1,
+        marginBottom:28,
+    }
 });
 
 export default Products

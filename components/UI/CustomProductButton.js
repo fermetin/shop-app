@@ -11,7 +11,7 @@ const CustomProductButton = ({icon,btnColor, btnName, onClickHandler ,disabled})
                 <Text  style={styles.text}>{btnName}</Text>
             </TouchableHighlight>
         </View>
-    )
+    ) 
 }
 const styles = StyleSheet.create({
     container:{

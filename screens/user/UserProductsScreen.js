@@ -45,7 +45,7 @@ const UserPrdouctScreen = ({ props, navigation }) => {
             </View>)
     }
 
-    const deleteButtonHandler = () => {
+    const deleteButtonHandler = (itemData) => {
         Alert.alert(
             'Hey',
             'Are you sure !!! You gonna delete this product',
@@ -54,21 +54,19 @@ const UserPrdouctScreen = ({ props, navigation }) => {
                 { text: 'Cancel', style: 'cancel' }
             ])
     }
-    const editButtonHanlder = ()=>{
+    const editButtonHandler = (itemData)=>{
         navigation.navigate('AddProductScreen', {
             productid: itemData.item.id,
             user: true
         })
     }
-
     return (
         <FlatList
-
-            data={userItems} renderItem={(itemData) =>
-                <Products user={true} item={itemData.item} >
+            data={userItems} keyExtractor={(item)=>item["id"]} renderItem={(itemData) =>
+                <Products  user={true} item={itemData.item} >
                     <View style={styles.btns}>
-                        <CustomProductButton btnName=" EDIT  " btnColor={colors.primary} onPress={() =>editButtonHanlder() } />
-                        <CustomProductButton btnName="DELETE" btnColor={colors.primary} onClickHandler={() => deleteButtonHandler()} />
+                        <CustomProductButton btnName=" EDIT  " btnColor={colors.primary} onClickHandler={() =>editButtonHandler(itemData)} />
+                        <CustomProductButton btnName="DELETE" btnColor={colors.primary} onClickHandler={() => deleteButtonHandler(itemData)} />
                     </View>
                 </Products>} />
 
