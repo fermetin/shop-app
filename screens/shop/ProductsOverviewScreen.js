@@ -16,24 +16,24 @@ const ProductsOverviewScreen = props => {
     const [err, seterr] = useState()
     const products = useSelector(state => state.products.availableProducts)
     const dispatch = useDispatch()
-
+    
     const loadingProducts = useCallback(async () => {
-        seterr()
-        setrefreshing(true)
+        seterr() // **set error empty becasuse we dont know if there is a error
+        setrefreshing(true) // **this is an ascynchronous function thats why this is kinda refreshing trigger spinner if statement
         try {
-            await dispatch(productActions.refresh_products())
+            await dispatch(productActions.refresh_products())//redux thunk
         } catch (err) {
-            seterr(err.message)
+            seterr(err.message)//if error set error to trigger error handling if statement 
         }
-        setrefreshing(false)
+        setrefreshing(false)// **trigger main if there is no error
     }, [dispatch, setrefreshing, seterr])
-
     useEffect(() => {
+        // If user come again the page after another screen (So "FOCUS THIS SCREEN")
         props.navigation.addListener('focus', loadingProducts)
-
+        //just dependency is loadingProducts if somethings change on the function that time so almost just run 1 time after for each render
     }, [loadingProducts])
 
-    useEffect(() => {
+    useEffect(() => { 
         setisloading(true)
         loadingProducts().then(() => {
             setisloading(false)
@@ -41,21 +41,24 @@ const ProductsOverviewScreen = props => {
 
     }, [dispatch, loadingProducts])
 
+    // error handling
     if (err) {
         return (
             <View style={styles.middlestaff}>
-                <Text style={{ fontSize: 14 }}>ERROR OCCURED </Text>
+                <Text style={{ fontSize: 14 }}>ERROR OCCUEED </Text>
                 <Button title='TRYAGAIN' color='red' onPress={loadingProducts} />
             </View>
         )
     }
-
+    
+    //spinner handling
     if (isloading) {
         return (
             <View style={styles.middlestaff}>
                 <ActivityIndicator size={100} color="#00f0ff" />
             </View>)
     }
+    //after spinner if there is no data 
     if (products.length === 0 && !isloading) {
         return (
             <View style={styles.middlestaff}>
@@ -63,13 +66,14 @@ const ProductsOverviewScreen = props => {
             </View>
         )
     }
-
+    //Product Details Screen Navigate
     const detailScreen = (title, productId) => {
         props.navigation.navigate('ProductDetailScreen', {
             title,
             productId
         })
     }
+    //for easy pointing/referencing  
     const detailsButtonHandler = (itemData) => {
         detailScreen(itemData.item.title, itemData.item.id)
     }
