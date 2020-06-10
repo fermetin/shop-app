@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, AsyncStorage } from 'react-native';
 import { useDispatch } from 'react-redux'
+import * as authactions from '../store/actions/auth'
 import {
   DrawerItem,
   DrawerContentScrollView,
@@ -19,8 +20,20 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import DrawerBtn from '../components/UI/DrawerBtn';
 
-export const  DrawerContent=(props)=>{
+export const DrawerContent = (props) => {
   const { navigation } = props
+  const dispatch = useDispatch()
+
+  //logout func and clear AsyncStorage
+  const logout =  () => {
+    try {
+      // handle redux and AsyncStorage
+       dispatch(authactions.logOut())
+    }catch(err){
+        console.log(err.message)
+    }
+  }
+
   return (
     <DrawerContentScrollView {...props}>
       <View
@@ -84,10 +97,7 @@ export const  DrawerContent=(props)=>{
             icon={({ color, size }) => (
               <MaterialCommunityIcons name='exit-to-app' color={color} size={size} />
             )}
-            onPress={async() => {
-              navigation.replace('StartScreen')
-              await AsyncStorage.clear()
-            }}
+            onPress={() => logout()}
           />
         </Drawer.Section>
       </View>

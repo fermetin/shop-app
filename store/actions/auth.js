@@ -1,16 +1,20 @@
 
 import { AsyncStorage } from 'react-native'
-
 export const SIGNUP = 'SIGNUP'
 export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
 export const AUTH = 'AUTH'
 
+let timerRef;
+export const authenticate = (token, userId, expiresTime) => {
+    return (dispatch) => {
+        dispatch(setLogoutTimerandLogOut(expiresTime))
+        dispatch({
+            type: AUTH,
+            userId: userId,
+            token: token
+        })
 
-export const authenticate = (token, userId) => {
-    return {
-        type: AUTH,
-        userId: userId,
-        token: token
     }
 }
 
@@ -33,9 +37,9 @@ export const singUp = (email, password) => {
                 throw new Error('Something Went Wrong to Sign Up');
             }
             const resData = await respond.json();
-
-            dispatch(authenticate(resData.idToken, resData.localId))
-            const tokenExpiresIn = new Date(new Date().getTime() + parseInt(resData.expiresIn) * 1000)
+            const expireMSeconds = parseInt(resData.expiresIn) * 1000
+            dispatch(authenticate(resData.idToken, resData.localId, expireMSeconds))
+            const tokenExpiresIn = new Date(new Date().getTime() + expireMSeconds)
             saveDataToDevice(resData.idToken, resData.localId, tokenExpiresIn)
         } catch (err) {
             throw err
@@ -69,16 +73,41 @@ export const logIn = (email, password) => {
                 throw new Error(mesg)
             }
             const resData = await respond.json()
-            dispatch(authenticate(resData.idToken, resData.localId))
-            const tokenExpiresIn = new Date(new Date().getTime() + parseInt(resData.expiresIn) * 1000)
+            const expireMSeconds = parseInt(resData.expiresIn) * 1000
+            dispatch(authenticate(resData.idToken, resData.localId, expireMSeconds))
+            const tokenExpiresIn = new Date(new Date().getTime() + expireMSeconds)
             saveDataToDevice(resData.idToken, resData.localId, tokenExpiresIn)
         } catch (err) {
             throw err
         }
     }
 }
+
+export const logOut = () => {
+    return async (dispatch) => {
+        clearTimerRef()
+        AsyncStorage.removeItem('userData')
+        dispatch({
+            type: LOGOUT
+        })
+    }
+
+}
+const clearTimerRef = () => {
+    if (timerRef) {
+        clearTimeout(timerRef)
+    }
+}
+
+const setLogoutTimerandLogOut = (expiresTime) => {
+    return (dispatch) => {
+        timerRef = setTimeout(() => {
+            dispatch(logOut())
+        }, expiresTime)
+    }
+}
 const saveDataToDevice = async (token, userId, tokenExpiresIn) => {
-    AsyncStorage.setItem(
+    await AsyncStorage.setItem(
         'userData',
         JSON.stringify({
             token: token,

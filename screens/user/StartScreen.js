@@ -19,15 +19,16 @@ const StartScreen = ({ navigation }) => {
             }
             const userData = JSON.parse(rawData)
             const { token, userId, tokenExpiresIn } = userData
-            const expiredDateMs = new Date(tokenExpiresIn)
+            const expiredDate = new Date(tokenExpiresIn)
             //if token expired 
-            if ( expiredDateMs <= new Date() || !token || !userId) {
+            if ( expiredDate <= new Date() || !token || !userId) {
                 navigation.replace('AuthScreen')
                 return
             }
+            const expiredMSeconds = expiredDate.getTime() - new Date().getTime()
             //token is still valid so we can go through app 
-            dispatch(authAction.authenticate(token, userId))
-            navigation.replace("MainDrawerNavigator")
+            dispatch(authAction.authenticate(token, userId,expiredMSeconds))
+            
         }
         tryToLogin()
         return

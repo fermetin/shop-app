@@ -14,6 +14,8 @@ export default (state = initialState , action )=>{
                 token :action.token,
                 userId:action.userId,
             }
+        case 'LOGOUT':
+            return initialState
         default:
                 return state
     }
