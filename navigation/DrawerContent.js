@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, AsyncStorage } from 'react-native';
 import { useDispatch } from 'react-redux'
-import * as authactions from '../../store/actions/auth'
+import * as authactions from '../store/actions/auth'
 import {
   DrawerItem,
   DrawerContentScrollView,
@@ -18,7 +18,7 @@ import {
   Switch,
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import DrawerBtn from '../../components/UI/DrawerBtn';
+import DrawerBtn from '../components/UI/DrawerBtn';
 
 export const DrawerContent = (props) => {
   const { navigation } = props
@@ -43,10 +43,7 @@ export const DrawerContent = (props) => {
       >
         <View style={styles.userInfoSection}>
           <Avatar.Image
-            source={{
-              uri:
-                'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg',
-            }}
+            source={require("../assets/foti.jpg")}
             size={50}
           />
           <Title style={styles.title}>Fatih Ermetin</Title>

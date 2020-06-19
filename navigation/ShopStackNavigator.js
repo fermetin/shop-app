@@ -1,12 +1,12 @@
 import React from 'react'
 import { createStackNavigator} from '@react-navigation/stack'
 import { Platform } from 'react-native'
-import colors from '../../constants/colors'
-import ProductsOverviewScreen from '../../screens/shop/ProductsOverviewScreen'
-import ProductDetailScreen from '../../screens/shop/ProductDetailScreen'
-import CartScreen from '../../screens/shop/CartScreen'
-import ShopBtn from '../../components/UI/ShopBtn'
-import DrawerBtn from '../../components/UI/DrawerBtn'
+import colors from '../constants/colors'
+import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen'
+import ProductDetailScreen from '../screens/shop/ProductDetailScreen'
+import CartScreen from '../screens/shop/CartScreen'
+import ShopBtn from '../components/UI/ShopBtn'
+import DrawerBtn from '../components/UI/DrawerBtn'
 
 
 const Stack = createStackNavigator()

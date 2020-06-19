@@ -11,7 +11,7 @@ import cartReducer from './store/reducers/cart'
 import ordersReducer from './store/reducers/orders'
 import authReducer from './store/reducers/auth'
 import { Provider as PaperProvider } from 'react-native-paper'
-import AppNavigator from './models/navigation/AppNavigator'
+import AppNavigator from './navigation/AppNavigator'
 
 
 
