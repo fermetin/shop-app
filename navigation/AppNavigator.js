@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { createStackNavigator, } from '@react-navigation/stack'
 import MainDrawerNavigator from './MainDrawerNavigator'
-import StartScreen from '../screens/user/StartScreen'
-import AuthScreen from '../screens/user/AuthScreen'
-import colors from '../constants/colors'
+import StartScreen from '../../screens/user/StartScreen'
+import AuthScreen from '../../screens/user/AuthScreen'
+import colors from '../../constants/colors'
 import { useSelector } from 'react-redux'
 const Stack = createStackNavigator()
 

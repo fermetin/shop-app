@@ -1,19 +1,17 @@
 
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, AsyncStorage } from 'react-native'
+import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import createSentryMiddleware from "redux-sentry-middleware";
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { Provider, useSelector } from 'react-redux'
+import { Provider, } from 'react-redux'
 import ReduxThunk from 'redux-thunk'
 import productsReducer from './store/reducers/products'
 import cartReducer from './store/reducers/cart'
 import ordersReducer from './store/reducers/orders'
 import authReducer from './store/reducers/auth'
 import { Provider as PaperProvider } from 'react-native-paper'
-import AppNavigator from './navigation/AppNavigator'
+import AppNavigator from './models/navigation/AppNavigator'
 
 
 
@@ -25,7 +23,7 @@ const rootReducer = combineReducers({
 })
 const store = createStore(rootReducer,
   composeWithDevTools(
-    applyMiddleware(ReduxThunk,)),
+    applyMiddleware(ReduxThunk)),
   )
 
 export default function App() {
@@ -44,11 +42,3 @@ export default function App() {
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})

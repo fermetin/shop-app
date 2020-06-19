@@ -1,13 +1,13 @@
 import React from 'react'
 import { Button} from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
-import UserProductScreen from '../screens/user/UserProductsScreen';
-import ProductDetailsScreen from '../screens/shop/ProductDetailScreen';
-import AddProductScreen from '../screens/user/AddProductScreen';
-import colors from '../constants/colors';
+import UserProductScreen from '../../screens/user/UserProductsScreen';
+import ProductDetailsScreen from '../../screens/shop/ProductDetailScreen';
+import AddProductScreen from '../../screens/user/AddProductScreen';
+import colors from '../../constants/colors';
 import {FontAwesome5} from '@expo/vector-icons'
-import AddBtn from '../components/UI/AddBtn';
-import DrawerBtn from '../components/UI/DrawerBtn';
+import AddBtn from '../../components/UI/AddBtn';
+import DrawerBtn from '../../components/UI/DrawerBtn';
 const Stack = createStackNavigator()
 
 const UserNavigator = () => {

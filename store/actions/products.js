@@ -13,7 +13,7 @@ export const refresh_products = () => {
             const response = await fetch('https://dummy-shop-app.firebaseio.com/products.json')
 
             if (!response.ok) {
-                throw new Error('Something went wrong')
+                throw new Error('Something went wrong on fetch res.ok not ok ')
             }
             const res = await response.json()
 
@@ -56,7 +56,7 @@ export const add_product = (product) => {
                 body: JSON.stringify(product)
             })
             if (!response.ok) {
-                throw new Error(`Product adding error`)
+                throw new Error(`Product adding went wrong on fetch res.ok not ok `)
             }
 
             const resData = await response.json()

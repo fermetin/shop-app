@@ -1,8 +1,8 @@
 import React from 'react'
 import { } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
-import OrderScreen from '../screens/shop/OrdersScreen'
-import DrawerBtn from '.././components/UI/DrawerBtn'
+import OrderScreen from '../../screens/shop/OrdersScreen'
+import DrawerBtn from '../../components/UI/DrawerBtn'
 const Stack = createStackNavigator()
 
 const OrderNavigator = () => {

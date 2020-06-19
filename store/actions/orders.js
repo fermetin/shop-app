@@ -21,7 +21,7 @@ export const addOrder = (cartItems, totalAmount) => {
             })
 
             if (!response.ok) {
-                throw new Error('Order Post Error Occured')
+                throw new Error('Order Post Error Occured on fetch')
             }
             const resData = await response.json()
 
@@ -50,7 +50,7 @@ export const refreshOrders = () => {
             const response = await fetch(`https://dummy-shop-app.firebaseio.com/orders/${userId}.json`)
             
             if (!response.ok) {
-                throw new Error('Orders Refresh Error Occured')
+                throw new Error('Orders Refresh Error Occured on fetch')
             }
             
             const res = await response.json()

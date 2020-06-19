@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, AsyncStorage } from 'react-native';
 import { useDispatch } from 'react-redux'
-import * as authactions from '../store/actions/auth'
+import * as authactions from '../../store/actions/auth'
 import {
   DrawerItem,
   DrawerContentScrollView,
@@ -18,7 +18,7 @@ import {
   Switch,
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import DrawerBtn from '../components/UI/DrawerBtn';
+import DrawerBtn from '../../components/UI/DrawerBtn';
 
 export const DrawerContent = (props) => {
   const { navigation } = props
